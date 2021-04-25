@@ -60,6 +60,26 @@ def word(filename):
     os.system('zip edited.docx \[Content_Types\].xml word/ _rels/ docProps/ -r')
     os.system('rm -rf _rels/ docProps/ word/ \[Content_Types\].xml')
 
+def pdf(filename):
+    os.system(f'cp {filename} edited{filename[-4:]}')
+
+    os.system(f'exiftool -Keywords=aboba edited.pdf')
+    os.system(f'exiftool -Notes=aboba edited.pdf')
+    os.system(f'exiftool -ReleaseDate=aboba edited.pdf')
+    os.system(f'exiftool -ReleaseTime=00:00:00 edited.pdf')
+    os.system(f'exiftool -DateTime=aboba edited.pdf')
+    os.system(f'exiftool -Author=aboba edited.pdf')
+    os.system(f'exiftool -CreatorTool=aboba edited.pdf')
+    os.system(f'exiftool -OwnerName=aboba edited.pdf')
+    os.system(f'exiftool -ModificationDate=aboba edited.pdf')
+    os.system(f'exiftool -Creator=aboba edited.pdf')
+    os.system(f'exiftool -Title=aboba edited.pdf')
+    os.system(f'exiftool -Producer=aboba edited.pdf')
+
 if __name__ == '__main__':
     filename = sys.argv[1]
-    word(filename)
+
+    if filename[-4:] == 'docx':
+        word(filename)
+    if filename[-4:] == '.pdf':
+        pdf(filename)
